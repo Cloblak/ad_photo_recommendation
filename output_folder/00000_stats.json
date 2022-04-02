@@ -1,0 +1,13 @@
+{
+    "count": 168,
+    "successes": 75,
+    "failed_to_download": 93,
+    "failed_to_resize": 0,
+    "duration": 4.464720726013184,
+    "start_time": 1648855601.6182299,
+    "end_time": 1648855606.0829506,
+    "status_dict": {
+        "HTTP Error 403: Forbidden": 93,
+        "success": 75
+    }
+}
