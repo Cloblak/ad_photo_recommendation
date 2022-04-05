@@ -1,0 +1,9 @@
+requests
+bs4
+pandas
+hashlib
+pathlib
+urllib
+gazpacho
+alive-progress
+click
