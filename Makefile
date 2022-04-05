@@ -6,7 +6,7 @@ format:
 	black scripts/*.py data/*.py
 
 lint:
-	python -m pylint --disable=R,C scripts/*.py --extension-pkg-whitelist=cv2
+	python -m pylint --disable=R, C scripts/*.py
 	
 clean: format lint
 all: install format lint
