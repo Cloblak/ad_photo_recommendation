@@ -2,7 +2,6 @@ requests
 bs4
 pandas
 pathlib
-urllib
 gazpacho
 alive-progress
 click
