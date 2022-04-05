@@ -3,10 +3,9 @@ install:
 		pip install -r requirements.txt
 
 format:
-	black scripts/*.py data/*.py
+	black *.py
 
 lint:
-	python -m pylint --disable=R, C scripts/*.py
-	
-clean: format lint
+	pylint --disable=R,C *.py
+
 all: install format lint
