@@ -7,3 +7,4 @@ alive-progress
 click
 pylint
 ez_setup
+black
