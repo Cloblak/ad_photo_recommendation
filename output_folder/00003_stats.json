@@ -1,0 +1,13 @@
+{
+    "count": 7212,
+    "successes": 7211,
+    "failed_to_download": 1,
+    "failed_to_resize": 0,
+    "duration": 338.48562264442444,
+    "start_time": 1649204943.884563,
+    "end_time": 1649205282.3701856,
+    "status_dict": {
+        "unknown url type: 'URL'": 1,
+        "success": 7211
+    }
+}
