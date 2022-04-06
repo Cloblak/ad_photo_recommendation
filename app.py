@@ -1,9 +1,7 @@
 #Load libraries
-import tldextract
 import streamlit as st
 import pandas as pd
 import numpy as np
-import wget
 import base64
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
@@ -12,13 +10,11 @@ import warnings
 # Import helpers
 import sys
 sys.path.insert(1, 'scripts/')
-import helpers
-from helpers import get_image_names, setAxes, getSimilarImages, plotSimilarImages
+from helpers import get_image_names, plotSimilarImages
 
 import os
 import pickle
 import shutil
-from PIL import Image
 
 warnings.filterwarnings("ignore")
 
@@ -42,15 +38,6 @@ hide_streamlit_style = """
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
-
-# Hide uploaded files widget
-css = """
-.uploadedFiles {
-    display: none;
-    visibility: hidden;
-}
-"""
-# or `visibility: hidden;`
 
 #General font (body)
 st.markdown(
@@ -101,7 +88,6 @@ def get_table_download_link(df):
     return f'<a href="data:file/csv;base64,{b64}" download="personalized_recommendations.csv">Download CSV</a>'
 
 ###############
-st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 st.markdown('<h1 style="font-family:Manrope;"> Personalized Ad Recommendations</h1>', unsafe_allow_html=True)
 st.markdown('<p style="font-family:Manrope;">Lorem Ipsum</p>', unsafe_allow_html=True)
@@ -126,7 +112,8 @@ if zipped_folder is not None:
 
     # Plot recommended images
     for image in qry_img_list:
-        st.pyplot(plotSimilarImages(image, similarNames, similarValues, inputDir = "images_only2"))
+        fig = plotSimilarImages(image, similarNames, similarValues, inputDir = "images_only2")
+        st.pyplot(fig)
 
     # Create a dictionary with all of the recommendations
     matches = {}

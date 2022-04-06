@@ -28,13 +28,12 @@ def get_image_names(inputDir):
   return query_images
 
 
-
 def setAxes(ax, image, query = False, **kwargs):
     value = kwargs.get("value", None)
     if query:
         ax.set_xlabel("Query Image\n{0}".format(image), fontsize = 12)
     else:
-        ax.set_xlabel("Similarity value {1:1.3f}\n{0}".format( image,  value), fontsize = 12)
+        ax.set_xlabel("Recommendation\n{0}".format(image), fontsize = 12)
     ax.set_xticks([])
     ax.set_yticks([])
 
@@ -50,12 +49,13 @@ def getSimilarImages(image, simNames, simVals):
         return imgs, vals
     else:
         print("'{}' Unknown image".format(image))
- 
-        
+
+     
 def plotSimilarImages(image, similarNames, similarValues, inputDir, numRow=1, numCol=10):
     simImages, simValues = getSimilarImages(image, similarNames, similarValues)
     fig = plt.figure(figsize=(20, 20))
-    
+    fig.patch.set_alpha(0)
+
     # now plot the  most simliar images
     for j in range(0, numCol*numRow):
         ax = []
