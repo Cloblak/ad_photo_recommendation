@@ -5,6 +5,30 @@ import os
 from PIL import Image
 
 # Helpers
+
+def get_image_names(inputDir):
+  """
+  Function to get all of the image file names from a folder.
+  
+  Parameters
+  ----------
+  inputDir : str
+      Input directory (with all of the images)
+  
+  Output
+  ----------
+  query_images : list
+      List with all of the image file names.
+  """
+  query_images = []
+  for filename in os.listdir('fb_post_images2'):
+    if filename.endswith("jpg"): 
+      query_images.append(filename)
+  
+  return query_images
+
+
+
 def setAxes(ax, image, query = False, **kwargs):
     value = kwargs.get("value", None)
     if query:
@@ -13,7 +37,8 @@ def setAxes(ax, image, query = False, **kwargs):
         ax.set_xlabel("Similarity value {1:1.3f}\n{0}".format( image,  value), fontsize = 12)
     ax.set_xticks([])
     ax.set_yticks([])
-    
+
+
 def getSimilarImages(image, simNames, simVals):
     if image in set(simNames.index):
         imgs = list(simNames.loc[image, :])
@@ -25,6 +50,7 @@ def getSimilarImages(image, simNames, simVals):
         return imgs, vals
     else:
         print("'{}' Unknown image".format(image))
+ 
         
 def plotSimilarImages(image, similarNames, similarValues, inputDir, numRow=1, numCol=10):
     simImages, simValues = getSimilarImages(image, similarNames, similarValues)
