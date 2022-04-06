@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 from numpy.testing import assert_almost_equal
 import os
 from PIL import Image
@@ -25,7 +26,7 @@ def getSimilarImages(image, simNames, simVals):
     else:
         print("'{}' Unknown image".format(image))
         
-def plotSimilarImages(image, similarNames, similarValues, numRow=1, numCol=10):
+def plotSimilarImages(image, similarNames, similarValues, inputDir, numRow=1, numCol=10):
     simImages, simValues = getSimilarImages(image, similarNames, similarValues)
     fig = plt.figure(figsize=(20, 20))
     
