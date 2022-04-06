@@ -26,7 +26,7 @@ warnings.filterwarnings("ignore")
 st.set_page_config(page_title=' Personalized Ad Recommendations', page_icon='https://upload.wikimedia.org/wikipedia/commons/e/e6/Duke_University_logo.svg')
 
 ###################### CSS Styling ############################################################################################################
-#Hide rainbow bar
+# Hide rainbow bar
 hide_decoration_bar_style = '''
     <style>
         header {visibility: hidden;}
@@ -34,7 +34,7 @@ hide_decoration_bar_style = '''
 '''
 st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 
-#Hide hamburger menu & footer
+# Hide hamburger menu & footer
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -42,6 +42,15 @@ hide_streamlit_style = """
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+
+# Hide uploaded files widget
+css = """
+.uploadedFiles {
+    display: none;
+    visibility: hidden;
+}
+"""
+# or `visibility: hidden;`
 
 #General font (body)
 st.markdown(
@@ -70,7 +79,29 @@ def save_uploadedfile(uploadedfile):
     with open(os.path.join(uploadedfile.name),"wb") as f:
         f.write(uploadedfile.getbuffer())
 
+#Credit to: https://discuss.streamlit.io/t/how-to-set-file-download-function/2141
+def get_table_download_link(df):
+    """
+    Generates a link allowing the data in a given dataframe to be downloaded.
+    
+    Parameters
+    ----------
+    df: dataframe
+            Dataframe to download.
+    
+    Output
+    ----------
+    out: str
+        href string
+    """
+    csv = df.to_csv(index=False)
+    b64 = base64.b64encode(
+        csv.encode()
+    ).decode()  # some strings <-> bytes conversions necessary here
+    return f'<a href="data:file/csv;base64,{b64}" download="personalized_recommendations.csv">Download CSV</a>'
+
 ###############
+st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 st.markdown('<h1 style="font-family:Manrope;"> Personalized Ad Recommendations</h1>', unsafe_allow_html=True)
 st.markdown('<p style="font-family:Manrope;">Lorem Ipsum</p>', unsafe_allow_html=True)
@@ -110,6 +141,12 @@ if zipped_folder is not None:
     df_matches.columns = ["rec_"+str(x) for x in df_matches.columns]
     df_matches.reset_index(inplace=True)
     df_matches.to_csv("recommendations.csv")
-    st.write(df_matches.head())
+    
+    #Review the raw data (dataframe) in the app
+    if st.checkbox('Show File With Recommendations', False): #Creates a checkbox to show/hide the data
+        st.write(df_matches)
+
+        #Allow users to download the data
+        st.markdown(get_table_download_link(df_matches), unsafe_allow_html=True)
 
 
