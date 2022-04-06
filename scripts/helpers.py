@@ -1,3 +1,7 @@
+import numpy as np
+from numpy.testing import assert_almost_equal
+
+
 # Helpers
 def setAxes(ax, image, query = False, **kwargs):
     value = kwargs.get("value", None)
