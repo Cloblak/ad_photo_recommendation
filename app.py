@@ -89,8 +89,13 @@ def get_table_download_link(df):
 
 ###############
 
-st.markdown('<h1 style="font-family:Manrope;"> Personalized Ad Recommendations</h1>', unsafe_allow_html=True)
-st.markdown('<p style="font-family:Manrope;">Lorem Ipsum</p>', unsafe_allow_html=True)
+st.markdown('<h1 style="font-family:Manrope;">Personalized Ad Recommendations</h1>', unsafe_allow_html=True)
+#st.markdown('<p style="font-family:Manrope;">Getting recommended products to create experiments in your campaigns can be difficult, especially when you have to manually match successful ads with other variations in your inventory. That’s why we built this tool that leverages AI to provide you with relevant recommendations to match your successful ads.</p>', unsafe_allow_html=True)
+st.markdown('<p style="font-family:Manrope;">To use this tool you just need to provide the URL to your website’s sitemap.xml file and a zipped folder with the images for which you would like to get recommendations. The output will be a CSV file with all of the URLs of the recommended images for each image in the folder.</p>', unsafe_allow_html=True)
+#st.markdown('<p style="font-family:Manrope;">The output will be a CSV file with all of the URLs of the recommended images for each image in the folder.</p>', unsafe_allow_html=True)
+
+
+sitemap_url = st.text_input("Enter your Sitemap URL")
 
 # Load models
 with open('similarNames.pkl', 'rb') as handle:
@@ -103,6 +108,7 @@ zipped_folder = st.file_uploader("Upload your zipped folder", type="zip")
 
 # Save & Unzip the file
 if zipped_folder is not None:
+    st.markdown('<h2 style="font-family:Manrope;"><b>Recommendations Preview</b></h2>', unsafe_allow_html=True)
     file_details = {"FileName":zipped_folder.name,"FileType":zipped_folder.type}
     save_uploadedfile(zipped_folder)
     shutil.unpack_archive(zipped_folder.name, 'query_images')
@@ -127,13 +133,14 @@ if zipped_folder is not None:
     df_matches = pd.DataFrame.from_dict(matches, orient='index')
     df_matches.columns = ["rec_"+str(x) for x in df_matches.columns]
     df_matches.reset_index(inplace=True)
+    df_matches = df_matches.rename(columns = {'index':'Query_Image'})
     df_matches.to_csv("recommendations.csv")
     
-    #Review the raw data (dataframe) in the app
-    if st.checkbox('Show File With Recommendations', False): #Creates a checkbox to show/hide the data
-        st.write(df_matches)
+    st.text("")
+    st.markdown('<h2 style="font-family:Manrope;"><b>Recommendation Details</b></h2>', unsafe_allow_html=True)
+    st.write(df_matches)
 
-        #Allow users to download the data
-        st.markdown(get_table_download_link(df_matches), unsafe_allow_html=True)
+    #Allow users to download the data
+    st.markdown(get_table_download_link(df_matches), unsafe_allow_html=True)
 
 
