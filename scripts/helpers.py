@@ -1,6 +1,7 @@
-import numpy as np
+import matplotlib.pyplot as plt
 from numpy.testing import assert_almost_equal
-
+import os
+from PIL import Image
 
 # Helpers
 def setAxes(ax, image, query = False, **kwargs):
