@@ -90,9 +90,7 @@ def get_table_download_link(df):
 ###############
 
 st.markdown('<h1 style="font-family:Manrope;">Personalized Ad Recommendations</h1>', unsafe_allow_html=True)
-#st.markdown('<p style="font-family:Manrope;">Getting recommended products to create experiments in your campaigns can be difficult, especially when you have to manually match successful ads with other variations in your inventory. That’s why we built this tool that leverages AI to provide you with relevant recommendations to match your successful ads.</p>', unsafe_allow_html=True)
 st.markdown('<p style="font-family:Manrope;">To use this tool you just need to provide the URL to your website’s sitemap.xml file and a zipped folder with the images for which you would like to get recommendations. The output will be a CSV file with all of the URLs of the recommended images for each image in the folder.</p>', unsafe_allow_html=True)
-#st.markdown('<p style="font-family:Manrope;">The output will be a CSV file with all of the URLs of the recommended images for each image in the folder.</p>', unsafe_allow_html=True)
 
 
 sitemap_url = st.text_input("Enter your Sitemap URL")
