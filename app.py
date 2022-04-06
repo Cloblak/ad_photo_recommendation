@@ -8,6 +8,12 @@ import base64
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import warnings
+import zipfile
+
+import os
+import pickle
+import shutil
+from PIL import Image
 
 warnings.filterwarnings("ignore")
 
@@ -33,33 +39,28 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 #General font (body)
-
 st.markdown(
-    """
-    <style>
-@font-face {
-font-family: 'Tangerine';
-font-style: normal;
-font-weight: 400;
-src: url(https://fonts.gstatic.com/s/tangerine/v12/IurY6Y5j_oScZZow4VOxCZZM.woff2) format('woff2');
-unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-html, body, [class*="css"]  {
-font-family: 'Tangerine';
-font-size: 48px;
-}
-</style>
-
-""",
-    unsafe_allow_html=True)
+  """
+  <style>
+    body {
+    font-family: Manrope;
+    }
+  </style>""",
+  unsafe_allow_html=True
+)
 
 ###################### CSS Styling ############################################################################################################
 
+st.markdown('<h1 style="font-family:Manrope;"> Personalized Ad Recommendations</h1>', unsafe_allow_html=True)
+st.markdown('<p style="font-family:Manrope;">Lorem Ipsum</p>', unsafe_allow_html=True)
+
+zipped_folder = st.file_uploader("Upload your zipped folder", type="zip")
+if zipped_folder is not None:
+    zipped_folder = zipfile.ZipFile(zipped_folder)
 
 
-#Create initial titles/subtitles
-st.markdown('<h1 style="font-family:Avenir,Helvetica Neue,sans-serif;"> Personalized Ad Recommendations </h1>', unsafe_allow_html=True)
-st.text("")
-st.markdown('<p style="font-family:Avenir,Helvetica Neue,sans-serif;">Lorem Ipsum</p>', unsafe_allow_html=True)
+#with zipfile.ZipFile(zipped_folder, 'r') as zip_ref:
+#    zip_ref.extractall('query_images')
+
+#st.write(zipped_folder)
 
