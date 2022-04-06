@@ -21,7 +21,7 @@ def get_image_names(inputDir):
       List with all of the image file names.
   """
   query_images = []
-  for filename in os.listdir('fb_post_images2'):
+  for filename in os.listdir(inputDir):
     if filename.endswith("jpg"): 
       query_images.append(filename)
   
