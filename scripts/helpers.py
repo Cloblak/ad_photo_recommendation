@@ -72,3 +72,4 @@ def plotSimilarImages(image, similarNames, similarValues, inputDir, numRow=1, nu
         img.close()
     
     plt.show()
+    return fig
