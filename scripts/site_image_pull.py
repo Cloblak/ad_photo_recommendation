@@ -120,5 +120,5 @@ if __name__ == "__main__":
             pass
 
         
-    print(f'Saving URL csv to "../data/{csv_name_path}.csv"')
-    image_url_df.to_csv(f'../data/{csv_name_path}.csv')
+    print(f'Saving URL csv to "data/{csv_name_path}.csv"')
+    image_url_df.to_csv(f'data/{csv_name_path}.csv')
