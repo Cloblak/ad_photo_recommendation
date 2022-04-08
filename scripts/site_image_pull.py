@@ -5,7 +5,6 @@ import hashlib
 from pathlib import Path
 from urllib.request import urlretrieve as download
 from gazpacho import Soup
-from alive_progress import alive_bar
 import click
 
 # Pass the headers you want to retrieve from the xml such as ["loc", "lastmod"]
